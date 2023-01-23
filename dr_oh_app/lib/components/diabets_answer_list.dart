@@ -411,7 +411,11 @@ class _FifthAState extends State<FifthA> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                days.round().toString(),
+                '${days.round().toString()}일',
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

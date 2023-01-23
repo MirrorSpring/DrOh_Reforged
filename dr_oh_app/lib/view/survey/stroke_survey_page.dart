@@ -3,6 +3,7 @@ import 'package:dr_oh_app/components/logout_btn.dart';
 import 'package:dr_oh_app/components/stroke_answer_list.dart';
 import 'package:dr_oh_app/model/stroke_model.dart';
 import 'package:dr_oh_app/view/survey/stroke_result_page.dart';
+import 'package:dr_oh_app/view/survey/stroke_survey_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +62,7 @@ class StrokeSurveyPage extends StatelessWidget {
               pageController: _pageController,
             ),
             // 3. 설문 입력받기 페이지
-            _surveyFromFirestore(context),
+            StrokeSurvey(pageCont: _surveyController,),
           ],
         );
       },

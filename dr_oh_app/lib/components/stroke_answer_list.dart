@@ -1,5 +1,6 @@
 import 'package:dr_oh_app/model/stroke_message.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 // ------------------------------------------------------------------------
 // Date: 2023-01-10, SangwonKim
@@ -29,28 +30,49 @@ class FirstAnswer extends StatefulWidget {
 class _FirstAnswerState extends State<FirstAnswer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text('예'),
-        Radio(
-          value: "1",
-          groupValue: StrokeMessage.hypertension,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.hypertension = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '고혈압 진단을 받은 적이 있습니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
         ),
-        const Text('아니오'),
-        Radio(
-          value: "0",
-          groupValue: StrokeMessage.hypertension,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.hypertension = value!;
-            });
-          },
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Radio(
+              value: "1",
+              groupValue: StrokeMessage.hypertension,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.hypertension = value!;
+                });
+              },
+            ),
+            const Text('예'),
+            const SizedBox(
+              width: 20,
+            ),
+            Radio(
+              value: "0",
+              groupValue: StrokeMessage.hypertension,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.hypertension = value!;
+                });
+              },
+            ),
+            const Text('아니오'),
+          ],
         ),
       ],
     );
@@ -69,28 +91,49 @@ class SecondAnswer extends StatefulWidget {
 class _SecondAnswerState extends State<SecondAnswer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text('예'),
-        Radio(
-          value: "1",
-          groupValue: StrokeMessage.heartDisease,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.heartDisease = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '심장병 진단을 받은 적이 있습니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
         ),
-        const Text('아니오'),
-        Radio(
-          value: "0",
-          groupValue: StrokeMessage.heartDisease,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.heartDisease = value!;
-            });
-          },
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Radio(
+              value: "1",
+              groupValue: StrokeMessage.heartDisease,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.heartDisease = value!;
+                });
+              },
+            ),
+            const Text('예'),
+            const SizedBox(
+              width: 20,
+            ),
+            Radio(
+              value: "0",
+              groupValue: StrokeMessage.heartDisease,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.heartDisease = value!;
+                });
+              },
+            ),
+            const Text('아니오'),
+          ],
         ),
       ],
     );
@@ -109,28 +152,49 @@ class ThirdAnswer extends StatefulWidget {
 class _ThirdAnswerState extends State<ThirdAnswer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text('예'),
-        Radio(
-          value: "1",
-          groupValue: StrokeMessage.everMarried,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.everMarried = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '결혼한 적이 있습니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
         ),
-        const Text('아니오'),
-        Radio(
-          value: "0",
-          groupValue: StrokeMessage.everMarried,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.everMarried = value!;
-            });
-          },
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Radio(
+              value: "1",
+              groupValue: StrokeMessage.everMarried,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.everMarried = value!;
+                });
+              },
+            ),
+            const Text('예'),
+            const SizedBox(
+              width: 20,
+            ),
+            Radio(
+              value: "0",
+              groupValue: StrokeMessage.everMarried,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.everMarried = value!;
+                });
+              },
+            ),
+            const Text('아니오'),
+          ],
         ),
       ],
     );
@@ -153,8 +217,21 @@ class _ForthAnswerState extends State<ForthAnswer> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '어떤 직종에서 일하고 있습니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('무직'),
             Radio(
               value: "0",
               groupValue: StrokeMessage.workType,
@@ -164,7 +241,7 @@ class _ForthAnswerState extends State<ForthAnswer> {
                 });
               },
             ),
-            const Text('청소년'),
+            const Text('무직'),
             Radio(
               value: "1",
               groupValue: StrokeMessage.workType,
@@ -174,12 +251,12 @@ class _ForthAnswerState extends State<ForthAnswer> {
                 });
               },
             ),
+            const Text('청소년'),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('공무원'),
             Radio(
               value: "2",
               groupValue: StrokeMessage.workType,
@@ -189,7 +266,7 @@ class _ForthAnswerState extends State<ForthAnswer> {
                 });
               },
             ),
-            const Text('자영업'),
+            const Text('공무원'),
             Radio(
               value: "3",
               groupValue: StrokeMessage.workType,
@@ -199,7 +276,7 @@ class _ForthAnswerState extends State<ForthAnswer> {
                 });
               },
             ),
-            const Text('사기업'),
+            const Text('자영업'),
             Radio(
               value: "4",
               groupValue: StrokeMessage.workType,
@@ -209,6 +286,7 @@ class _ForthAnswerState extends State<ForthAnswer> {
                 });
               },
             ),
+            const Text('사기업'),
           ],
         ),
       ],
@@ -228,28 +306,50 @@ class FifthAnswer extends StatefulWidget {
 class _FifthAnswerState extends State<FifthAnswer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text('도시'),
-        Radio(
-          value: "1",
-          groupValue: StrokeMessage.residenceType,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.residenceType = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '거주 지역은 어디입니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
         ),
-        const Text('시골'),
-        Radio(
-          value: "0",
-          groupValue: StrokeMessage.residenceType,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.residenceType = value!;
-            });
-          },
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Radio(
+              value: "1",
+              groupValue: StrokeMessage.residenceType,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.residenceType = value!;
+                });
+              },
+            ),
+            const Text('도시'),
+            const SizedBox(
+              width: 20,
+            ),
+            Radio(
+              value: "0",
+              groupValue: StrokeMessage.residenceType,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.residenceType = value!;
+                });
+              },
+            ),
+            const Text('시골'),
+            
+          ],
         ),
       ],
     );
@@ -268,28 +368,49 @@ class SixAnswer extends StatefulWidget {
 class _SixAnswerState extends State<SixAnswer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text('예'),
-        Radio(
-          value: "1",
-          groupValue: StrokeMessage.smoke,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.smoke = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '흡연을 하십니까?',
+              style: TextStyle(
+                  fontSize: 17,
+                ),
+            ),
+          ],
         ),
-        const Text('아니오'),
-        Radio(
-          value: "0",
-          groupValue: StrokeMessage.smoke,
-          onChanged: (value) {
-            setState(() {
-              StrokeMessage.smoke = value!;
-            });
-          },
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('예'),
+            Radio(
+              value: "1",
+              groupValue: StrokeMessage.smoke,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.smoke = value!;
+                });
+              },
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            const Text('아니오'),
+            Radio(
+              value: "0",
+              groupValue: StrokeMessage.smoke,
+              onChanged: (value) {
+                setState(() {
+                  StrokeMessage.smoke = value!;
+                });
+              },
+            ),
+          ],
         ),
       ],
     );

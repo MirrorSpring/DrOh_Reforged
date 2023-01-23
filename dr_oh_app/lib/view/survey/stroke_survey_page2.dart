@@ -1,23 +1,24 @@
 import 'dart:io';
 
 import 'package:dr_oh_app/components/diabets_answer_list.dart';
+import 'package:dr_oh_app/components/stroke_answer_list.dart';
 import 'package:dr_oh_app/model/diabetes_message.dart';
 import 'package:dr_oh_app/repository/localdata/diabetes_predict.dart';
 import 'package:dr_oh_app/view/survey/diabetes_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DiaSurvey extends StatelessWidget {
+class StrokeSurvey extends StatelessWidget {
   final PageController pageCont;
-  const DiaSurvey({super.key, required this.pageCont});
+  const StrokeSurvey({super.key, required this.pageCont});
 
   @override
   Widget build(BuildContext context) {
     final PageController nextController = PageController(initialPage: 0);
-    DAnswer dAnswer = DAnswer();
+    StrokeAnswerList sAnswer = StrokeAnswerList();
     return PageView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 5,
+      itemCount: 6,
       controller: nextController,
       reverse: false,
       itemBuilder: (context, index) {
@@ -36,7 +37,7 @@ class DiaSurvey extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10,20,10,0),
-                      child: dAnswer.dAnserList[index],
+                      child: sAnswer.strokeAnswerList[index],
                     ),
                   ],
                 ),
@@ -64,7 +65,7 @@ class DiaSurvey extends StatelessWidget {
                   width: 100,
                   child: Center(
                     child: Text(
-                      '${index + 1}/5',
+                      '${index + 1}/6',
                       style: const TextStyle(
                         fontSize: 18,
                       ),
@@ -72,7 +73,7 @@ class DiaSurvey extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: index < 4
+                  onPressed: index < 5
                       ? () {
                           nextController.animateToPage(
                             index + 1,
@@ -86,7 +87,7 @@ class DiaSurvey extends StatelessWidget {
               ],
             ),
             Visibility(
-              visible: index == 4,
+              visible: index == 5,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -133,12 +134,12 @@ class DiaSurvey extends StatelessWidget {
             children: const [
               CircularProgressIndicator.adaptive(
                 backgroundColor: Color(0xFF5B9D46),
-                semanticsValue: "인공지능이 당뇨병 위혐도를 예측 중입니다.",
+                semanticsValue: "인공지능이 뇌졸중 위혐도를 예측 중입니다.",
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  '인공지능이 당뇨병 위혐도를 예측 중입니다.',
+                  '인공지능이 뇌졸중 위혐도를 예측 중입니다.',
                   style: TextStyle(
                     color: Colors.white,
                   ),
