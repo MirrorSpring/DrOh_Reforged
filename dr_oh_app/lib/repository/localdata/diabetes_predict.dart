@@ -23,9 +23,9 @@ class DiabetesPredict {
     var url = Uri.parse(
 
         // iphone ip
-        'http://localhost:8080/diabetes?age=$age&bmi=$bmi&physact=$physact&genhealth=$genhealth&hdattack=$hdattack&highbp=$highbp&stroke=$stroke&physhealth=$physhealth&diffwalk=$diffwalk');
-        // android ip
-        // 'http://192.168.10.213:8080/diabetes?age=$age&bmi=$bmi&physact=$physact&genhealth=$genhealth&hdattack=$hdattack&highbp=$highbp&stroke=$stroke&physhealth=$physhealth&diffwalk=$diffwalk');
+        //'http://localhost:8080/diabetes?age=$age&bmi=$bmi&physact=$physact&genhealth=$genhealth&hdattack=$hdattack&highbp=$highbp&stroke=$stroke&physhealth=$physhealth&diffwalk=$diffwalk');
+    // android ip
+     'http://192.168.55.245:8080/diabetes?age=$age&bmi=$bmi&physact=$physact&genhealth=$genhealth&hdattack=$hdattack&highbp=$highbp&stroke=$stroke&physhealth=$physhealth&diffwalk=$diffwalk');
 
     var response = await http.get(url);
     var dataConvertedJSON = await json.decode(utf8.decode(response.bodyBytes));
@@ -40,7 +40,7 @@ class DiabetesPredict {
     DiabetesMessage.hdattack = false;
     DiabetesMessage.highbp = false;
     DiabetesMessage.hdattack = false;
-    DiabetesMessage.physhealth.text = '';
+    DiabetesMessage.physhealth = 0;
     DiabetesMessage.isComplete = false;
 
     _saveResult(result);
@@ -56,7 +56,7 @@ class DiabetesPredict {
     String date = DateTime.now().toString().substring(0, 10);
 
     FirebaseFirestore.instance.collection('result').add({
-      'result': (double.parse(result)*100).toString(),
+      'result': (double.parse(result) * 100).toString(),
       'userid': id,
       'date': date,
       'category': '당뇨병'

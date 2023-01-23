@@ -27,35 +27,47 @@ class _FirstAState extends State<FirstA> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text(
-          '예',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '최근 30일 동안 일 외의 신체활동을 한 적이 있습니까?',
+            ),
+          ],
         ),
-        Radio(
-          value: "TRUE",
-          groupValue: DiabetesMessage.physact,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.physact = value!;
-            });
-          },
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        const Text(
-          '아니오',
-        ),
-        Radio(
-          value: "FALSE",
-          groupValue: DiabetesMessage.physact,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.physact = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '예',
+            ),
+            Radio(
+              value: "TRUE",
+              groupValue: DiabetesMessage.physact,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.physact = value!;
+                });
+              },
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            const Text(
+              '아니오',
+            ),
+            Radio(
+              value: "FALSE",
+              groupValue: DiabetesMessage.physact,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.physact = value!;
+                });
+              },
+            ),
+          ],
         ),
       ],
     );
@@ -83,27 +95,39 @@ class _SecondAState extends State<SecondA> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text(
-          '안 좋음',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '현재 본인의 전반적인 건강 생태가 어떻다고 생각하십니까?',
+            ),
+          ],
         ),
-        Slider(
-          value: score,
-          divisions: 4,
-          min: 1,
-          max: 5,
-          label: score.toString(),
-          onChanged: (value) {
-            setState(() {
-              score = value;
-            });
-            DiabetesMessage.genhealth = value;
-          },
-        ),
-        const Text(
-          '좋음',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '안 좋음',
+            ),
+            Slider(
+              value: score,
+              divisions: 4,
+              min: 1,
+              max: 5,
+              label: score.toString(),
+              onChanged: (value) {
+                setState(() {
+                  score = value;
+                });
+                DiabetesMessage.genhealth = value;
+              },
+            ),
+            const Text(
+              '좋음',
+            ),
+          ],
         ),
       ],
     );
@@ -126,35 +150,47 @@ class _ThirdAState extends State<ThirdA> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text(
-          '예',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '걷는 데에 심각한 어려움이 있습니까?',
+            ),
+          ],
         ),
-        Radio(
-          value: "TRUE",
-          groupValue: DiabetesMessage.diffwalk,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.diffwalk = 'TRUE';
-            });
-          },
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        const Text(
-          '아니오',
-        ),
-        Radio(
-          value: "FALSE",
-          groupValue: DiabetesMessage.diffwalk,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.diffwalk = 'FALSE';
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '예',
+            ),
+            Radio(
+              value: "TRUE",
+              groupValue: DiabetesMessage.diffwalk,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.diffwalk = 'TRUE';
+                });
+              },
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            const Text(
+              '아니오',
+            ),
+            Radio(
+              value: "FALSE",
+              groupValue: DiabetesMessage.diffwalk,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.diffwalk = 'FALSE';
+                });
+              },
+            ),
+          ],
         ),
       ],
     );
@@ -186,72 +222,87 @@ class _FourthAState extends State<FourthA> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        const Text(
-          '고혈압',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '진단받은 적 있는 질환을 체크해 주세요.',
+            ),
+          ],
         ),
-        Checkbox(
-          value: DiabetesMessage.highbp,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.highbp = value!;
-              if (value) {
-                fourth = false;
-              } else if (!DiabetesMessage.stroke && !DiabetesMessage.hdattack) {
-                fourth = true;
-              }
-            });
-          },
-        ),
-        const Text(
-          '뇌졸중',
-        ),
-        Checkbox(
-          value: DiabetesMessage.stroke,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.stroke = value!;
-              if (value) {
-                fourth = false;
-              } else if (!DiabetesMessage.highbp && !DiabetesMessage.hdattack) {
-                fourth = true;
-              }
-            });
-          },
-        ),
-        const Text(
-          '심장 질환',
-        ),
-        Checkbox(
-          value: DiabetesMessage.hdattack,
-          onChanged: (value) {
-            setState(() {
-              DiabetesMessage.hdattack = value!;
-              if (value) {
-                fourth = false;
-              } else if (!DiabetesMessage.highbp && !DiabetesMessage.stroke) {
-                fourth = true;
-              }
-            });
-          },
-        ),
-        const Text(
-          '해당 없음',
-        ),
-        Checkbox(
-          value: fourth,
-          onChanged: (value) {
-            setState(() {
-              if (!fourth) {
-                DiabetesMessage.highbp = false;
-                DiabetesMessage.stroke = false;
-                DiabetesMessage.hdattack = false;
-                fourth = value!;
-              }
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Checkbox(
+              value: DiabetesMessage.highbp,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.highbp = value!;
+                  if (value) {
+                    fourth = false;
+                  } else if (!DiabetesMessage.stroke &&
+                      !DiabetesMessage.hdattack) {
+                    fourth = true;
+                  }
+                });
+              },
+            ),
+            const Text(
+              '고혈압',
+            ),
+            Checkbox(
+              value: DiabetesMessage.stroke,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.stroke = value!;
+                  if (value) {
+                    fourth = false;
+                  } else if (!DiabetesMessage.highbp &&
+                      !DiabetesMessage.hdattack) {
+                    fourth = true;
+                  }
+                });
+              },
+            ),
+            const Text(
+              '뇌졸중',
+            ),
+            Checkbox(
+              value: DiabetesMessage.hdattack,
+              onChanged: (value) {
+                setState(() {
+                  DiabetesMessage.hdattack = value!;
+                  if (value) {
+                    fourth = false;
+                  } else if (!DiabetesMessage.highbp &&
+                      !DiabetesMessage.stroke) {
+                    fourth = true;
+                  }
+                });
+              },
+            ),
+            const Text(
+              '심장 질환',
+            ),
+            Checkbox(
+              value: fourth,
+              onChanged: (value) {
+                setState(() {
+                  if (!fourth) {
+                    DiabetesMessage.highbp = false;
+                    DiabetesMessage.stroke = false;
+                    DiabetesMessage.hdattack = false;
+                    fourth = value!;
+                  }
+                });
+              },
+            ),
+            const Text(
+              '해당 없음',
+            ),
+          ],
         ),
       ],
     );
@@ -267,37 +318,82 @@ class FifthA extends StatefulWidget {
 
 class _FifthAState extends State<FifthA> {
   late TextEditingController dayCont;
+  late double days;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dayCont = TextEditingController();
+    days = 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        SizedBox(
-          width: 100,
-          child: TextField(
-            controller: DiabetesMessage.physhealth,
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-              if(value.isEmpty){
-                setState(() {
-                  DiabetesMessage.isComplete=false;
-                });
-              } else{
-                setState(() {
-                  DiabetesMessage.isComplete=true;
-                });
-              }
-            },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              '최근 30일 내에 부상이나 질병이 있었던 기간이 얼마나 됩니까?',
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                days.round().toString(),
+              ),
+            ],
           ),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (days > 0) {
+                    days--;
+                  }
+                });
+              },
+              icon: const Icon(
+                Icons.remove,
+              ),
+            ),
+            Slider(
+              value: days,
+              divisions: 30,
+              min: 0,
+              max: 30,
+              label: days.round().toString(),
+              onChanged: (value) {
+                setState(() {
+                  days = value;
+                });
+                DiabetesMessage.physhealth = value;
+              },
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (days < 30) {
+                    days++;
+                  }
+                });
+              },
+              icon: const Icon(
+                Icons.add,
+              ),
+            ),
+          ],
+        ),
+        
       ],
     );
   }

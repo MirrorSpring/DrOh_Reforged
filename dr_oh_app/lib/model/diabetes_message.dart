@@ -10,6 +10,6 @@ class DiabetesMessage {
   static bool highbp = false;
   static bool stroke = false;
   static String diffwalk = 'FALSE';
-  static TextEditingController physhealth = TextEditingController();
+  static double physhealth = 0;
   static bool isComplete=false;
 }

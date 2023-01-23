@@ -7,6 +7,7 @@ import 'package:dr_oh_app/model/diabetes_message.dart';
 import 'package:dr_oh_app/model/firebase_dementia.dart';
 import 'package:dr_oh_app/repository/localdata/diabetes_predict.dart';
 import 'package:dr_oh_app/view/survey/diabetes_result_page.dart';
+import 'package:dr_oh_app/view/survey/diabetes_survey_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +56,7 @@ class DiabetesSurveyPage extends StatelessWidget {
             DiaPrivacy(pageCont: _nextController),
             DUserInfo(pageCont: _nextController),
             //설문 시작
-            firestore(context),
+            DiaSurvey(pageCont: _nextController,),
           ],
         );
       },
@@ -126,7 +127,7 @@ class DiabetesSurveyPage extends StatelessWidget {
                           DiabetesMessage.hdattack,
                           DiabetesMessage.highbp,
                           DiabetesMessage.stroke,
-                          int.parse(DiabetesMessage.physhealth.text));
+                          DiabetesMessage.physhealth.round());
                       Get.off(DiabetesResultPage(result: result));
                     },
               child: const Text(
