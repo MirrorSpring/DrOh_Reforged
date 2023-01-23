@@ -32,17 +32,22 @@ class _FirstAState extends State<FirstA> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text(
-              '최근 30일 동안 일 외의 신체활동을 한 적이 있습니까?',
+            Expanded(
+              child: Text(
+                '최근 30일 동안 일 외의 신체활동을 한 적이 있습니까?',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 50,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              '예',
-            ),
             Radio(
               value: "TRUE",
               groupValue: DiabetesMessage.physact,
@@ -52,11 +57,11 @@ class _FirstAState extends State<FirstA> {
                 });
               },
             ),
+            const Text(
+              '예',
+            ),
             const SizedBox(
               width: 20,
-            ),
-            const Text(
-              '아니오',
             ),
             Radio(
               value: "FALSE",
@@ -66,6 +71,9 @@ class _FirstAState extends State<FirstA> {
                   DiabetesMessage.physact = value!;
                 });
               },
+            ),
+            const Text(
+              '아니오',
             ),
           ],
         ),
@@ -100,10 +108,18 @@ class _SecondAState extends State<SecondA> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text(
-              '현재 본인의 전반적인 건강 생태가 어떻다고 생각하십니까?',
+            Expanded(
+              child: Text(
+                '현재 본인의 전반적인 건강 생태가 어떻다고 생각하십니까?',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 50,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -111,18 +127,21 @@ class _SecondAState extends State<SecondA> {
             const Text(
               '안 좋음',
             ),
-            Slider(
-              value: score,
-              divisions: 4,
-              min: 1,
-              max: 5,
-              label: score.toString(),
-              onChanged: (value) {
-                setState(() {
-                  score = value;
-                });
-                DiabetesMessage.genhealth = value;
-              },
+            SizedBox(
+              width: 180,
+              child: Slider(
+                value: score,
+                divisions: 4,
+                min: 1,
+                max: 5,
+                label: score.round().toString(),
+                onChanged: (value) {
+                  setState(() {
+                    score = value;
+                  });
+                  DiabetesMessage.genhealth = value;
+                },
+              ),
             ),
             const Text(
               '좋음',
@@ -155,10 +174,18 @@ class _ThirdAState extends State<ThirdA> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text(
-              '걷는 데에 심각한 어려움이 있습니까?',
+            Expanded(
+              child: Text(
+                '걷는 데에 심각한 어려움이 있습니까?',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 50,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -227,80 +254,110 @@ class _FourthAState extends State<FourthA> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text(
-              '진단받은 적 있는 질환을 체크해 주세요.',
+            Expanded(
+              child: Text(
+                '진단받은 적 있는 질환을 체크해 주세요.',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             ),
           ],
         ),
-        Row(
+        const SizedBox(
+          height: 50,
+        ),
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Checkbox(
-              value: DiabetesMessage.highbp,
-              onChanged: (value) {
-                setState(() {
-                  DiabetesMessage.highbp = value!;
-                  if (value) {
-                    fourth = false;
-                  } else if (!DiabetesMessage.stroke &&
-                      !DiabetesMessage.hdattack) {
-                    fourth = true;
-                  }
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Checkbox(
+                  value: DiabetesMessage.highbp,
+                  onChanged: (value) {
+                    setState(() {
+                      DiabetesMessage.highbp = value!;
+                      if (value) {
+                        fourth = false;
+                      } else if (!DiabetesMessage.stroke &&
+                          !DiabetesMessage.hdattack) {
+                        fourth = true;
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 70,
+                  child: Text(
+                    '고혈압',
+                  ),
+                ),
+                Checkbox(
+                  value: DiabetesMessage.stroke,
+                  onChanged: (value) {
+                    setState(() {
+                      DiabetesMessage.stroke = value!;
+                      if (value) {
+                        fourth = false;
+                      } else if (!DiabetesMessage.highbp &&
+                          !DiabetesMessage.hdattack) {
+                        fourth = true;
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 70,
+                  child: Text(
+                    '뇌졸중',
+                  ),
+                ),
+              ],
             ),
-            const Text(
-              '고혈압',
-            ),
-            Checkbox(
-              value: DiabetesMessage.stroke,
-              onChanged: (value) {
-                setState(() {
-                  DiabetesMessage.stroke = value!;
-                  if (value) {
-                    fourth = false;
-                  } else if (!DiabetesMessage.highbp &&
-                      !DiabetesMessage.hdattack) {
-                    fourth = true;
-                  }
-                });
-              },
-            ),
-            const Text(
-              '뇌졸중',
-            ),
-            Checkbox(
-              value: DiabetesMessage.hdattack,
-              onChanged: (value) {
-                setState(() {
-                  DiabetesMessage.hdattack = value!;
-                  if (value) {
-                    fourth = false;
-                  } else if (!DiabetesMessage.highbp &&
-                      !DiabetesMessage.stroke) {
-                    fourth = true;
-                  }
-                });
-              },
-            ),
-            const Text(
-              '심장 질환',
-            ),
-            Checkbox(
-              value: fourth,
-              onChanged: (value) {
-                setState(() {
-                  if (!fourth) {
-                    DiabetesMessage.highbp = false;
-                    DiabetesMessage.stroke = false;
-                    DiabetesMessage.hdattack = false;
-                    fourth = value!;
-                  }
-                });
-              },
-            ),
-            const Text(
-              '해당 없음',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Checkbox(
+                  value: DiabetesMessage.hdattack,
+                  onChanged: (value) {
+                    setState(() {
+                      DiabetesMessage.hdattack = value!;
+                      if (value) {
+                        fourth = false;
+                      } else if (!DiabetesMessage.highbp &&
+                          !DiabetesMessage.stroke) {
+                        fourth = true;
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 70,
+                  child: Text(
+                    '심장 질환',
+                  ),
+                ),
+                Checkbox(
+                  value: fourth,
+                  onChanged: (value) {
+                    setState(() {
+                      if (!fourth) {
+                        DiabetesMessage.highbp = false;
+                        DiabetesMessage.stroke = false;
+                        DiabetesMessage.hdattack = false;
+                        fourth = value!;
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(
+                  width: 70,
+                  child: Text(
+                    '해당 없음',
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -335,10 +392,18 @@ class _FifthAState extends State<FifthA> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text(
-              '최근 30일 내에 부상이나 질병이 있었던 기간이 얼마나 됩니까?',
+            Expanded(
+              child: Text(
+                '최근 30일 내에 부상이나 질병이 있었던 기간이 얼마나 됩니까?',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 50,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -393,7 +458,6 @@ class _FifthAState extends State<FifthA> {
             ),
           ],
         ),
-        
       ],
     );
   }

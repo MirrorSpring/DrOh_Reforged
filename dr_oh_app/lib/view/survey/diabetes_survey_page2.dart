@@ -16,7 +16,7 @@ class DiaSurvey extends StatelessWidget {
     final PageController nextController = PageController(initialPage: 0);
     DAnswer dAnswer = DAnswer();
     return PageView.builder(
-      // physics: const NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 5,
       controller: nextController,
       reverse: false,
@@ -25,7 +25,16 @@ class DiaSurvey extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              dAnswer.dAnserList[index],
+              Card(
+                color: const Color(0xFFDDF7D5),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: dAnswer.dAnserList[index],
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -40,6 +49,18 @@ class DiaSurvey extends StatelessWidget {
                           }
                         : null,
                     icon: const Icon(Icons.arrow_back),
+                    style: IconButton.styleFrom(fixedSize: Size(60, 60)),
+                  ),
+                  SizedBox(
+                    width: 100,
+                    child: Center(
+                      child: Text(
+                        '${index + 1}/5',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ),
                   IconButton(
                     onPressed: index < 4
@@ -61,22 +82,22 @@ class DiaSurvey extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () async{
+                      onPressed: () async {
                         _showLoading(context);
                         DiabetesPredict predict = DiabetesPredict();
-                      String result = await predict.predict(
-                          DiabetesMessage.age,
-                          DiabetesMessage.height,
-                          DiabetesMessage.weight,
-                          DiabetesMessage.physact,
-                          DiabetesMessage.diffwalk,
-                          DiabetesMessage.genhealth,
-                          DiabetesMessage.hdattack,
-                          DiabetesMessage.highbp,
-                          DiabetesMessage.stroke,
-                          DiabetesMessage.physhealth.round());
-                      sleep(const Duration(seconds: 3));
-                      Get.off(DiabetesResultPage(result: result));
+                        String result = await predict.predict(
+                            DiabetesMessage.age,
+                            DiabetesMessage.height,
+                            DiabetesMessage.weight,
+                            DiabetesMessage.physact,
+                            DiabetesMessage.diffwalk,
+                            DiabetesMessage.genhealth,
+                            DiabetesMessage.hdattack,
+                            DiabetesMessage.highbp,
+                            DiabetesMessage.stroke,
+                            DiabetesMessage.physhealth.round());
+                        sleep(const Duration(seconds: 3));
+                        Get.off(DiabetesResultPage(result: result));
                       },
                       child: const Text(
                         '제출',
@@ -110,6 +131,9 @@ class DiaSurvey extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: Text(
                   '인공지능이 당뇨병 위혐도를 예측 중입니다.',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
