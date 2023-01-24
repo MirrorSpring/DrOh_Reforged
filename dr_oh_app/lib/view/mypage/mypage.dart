@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dr_oh_app/components/logout_btn.dart';
+import 'package:dr_oh_app/model/body_info_model.dart';
 import 'package:dr_oh_app/model/user.dart';
 import 'package:dr_oh_app/repository/localdata/user_repository.dart';
+import 'package:dr_oh_app/view/home/body_info.dart';
 
 import 'package:dr_oh_app/view/mypage/chart_dementia_test.dart';
 import 'package:dr_oh_app/view/mypage/chart_diabetes.dart';
@@ -286,6 +288,87 @@ class _MyPageState extends State<MyPage> {
     });
   }
 
+  // Desc: 신체정보 받아오기
+  // Date: 2023-01-11
+  Widget _getBodyinfo(DocumentSnapshot doc) {
+    final bodyinfo = doc.data().toString().contains('height')
+        ? BodyInfoModel(
+            id: doc['id'],
+            height: doc['height'],
+            weight: doc['weight'],
+          )
+        : BodyInfoModel(id: '', height: '', weight: '');
+    return ListTile(
+      title: bodyinfo.height.toString().isNotEmpty
+          ? Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '키 : ${bodyinfo.height}cm',
+                    style: const TextStyle(
+                      fontSize: 28,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '몸무게 : ${bodyinfo.weight}kg',
+                    style: const TextStyle(
+                      fontSize: 28,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              children: const [
+                Text(
+                  '입력된 신체정보가 없습니다.',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+  
+    // Desc: 버튼 style
+  Widget _button(dynamic path, String title) {
+    return ElevatedButton(
+      onPressed: () {
+        Get.to(path);
+      },
+      child: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  // Desc: 홈화면 섹션 구분 박스
+  // 2023-01-07, youngjin lee
+  BoxDecoration _borderBox() {
+    return BoxDecoration(
+      border: Border.all(
+        style: BorderStyle.solid,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(5),
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 1,
+          blurRadius: 1,
+        ),
+      ],
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -330,6 +413,44 @@ class _MyPageState extends State<MyPage> {
                 }),
               ),
             ),
+
+            _head('신체정보'),
+              const SizedBox(height: 3),
+              Container(
+                decoration: _borderBox(),
+                height: 200,
+                width: 350,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .where('id', isEqualTo: id)
+                            .snapshots(),
+                        builder: ((context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          final documents = snapshot.data!.docs;
+
+                          return ListView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            children:
+                                documents.map((e) => _getBodyinfo(e)).toList(),
+                          );
+                        }),
+                      ),
+                    ),
+                    _button(const BodyInfo(), '입력하러 가기'),
+                  ],
+                ),
+              ),
+            
             const SizedBox(height: 30),
             _head('추가정보'),
             _additionalInfo(),

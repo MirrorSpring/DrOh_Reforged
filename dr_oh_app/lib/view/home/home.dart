@@ -12,6 +12,9 @@ import 'package:dr_oh_app/view/home/checkup_history.dart';
 import 'package:dr_oh_app/view/home/hospital_visit.dart';
 import 'package:dr_oh_app/view/home/medication.dart';
 import 'package:dr_oh_app/view/mypage/edit_member_info.dart';
+import 'package:dr_oh_app/view/survey/dementia_survey.dart';
+import 'package:dr_oh_app/view/survey/diabetes_survey_page.dart';
+import 'package:dr_oh_app/view/survey/stroke_survey_page.dart';
 import 'package:dr_oh_app/viewmodel/checkup_history_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -250,53 +253,53 @@ class _HomeState extends State<Home> {
     ));
   }
 
-  // Desc: 신체정보 받아오기
-  // Date: 2023-01-11
-  Widget _getBodyinfo(DocumentSnapshot doc) {
-    final bodyinfo = doc.data().toString().contains('height')
-        ? BodyInfoModel(
-            id: doc['id'],
-            height: doc['height'],
-            weight: doc['weight'],
-          )
-        : BodyInfoModel(id: '', height: '', weight: '');
-    return ListTile(
-      title: bodyinfo.height.toString().isNotEmpty
-          ? Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '키 : ${bodyinfo.height}cm',
-                    style: const TextStyle(
-                      fontSize: 28,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '몸무게 : ${bodyinfo.weight}kg',
-                    style: const TextStyle(
-                      fontSize: 28,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : Column(
-              children: const [
-                Text(
-                  '입력된 신체정보가 없습니다.',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-    );
-  }
+  // // Desc: 신체정보 받아오기
+  // // Date: 2023-01-11
+  // Widget _getBodyinfo(DocumentSnapshot doc) {
+  //   final bodyinfo = doc.data().toString().contains('height')
+  //       ? BodyInfoModel(
+  //           id: doc['id'],
+  //           height: doc['height'],
+  //           weight: doc['weight'],
+  //         )
+  //       : BodyInfoModel(id: '', height: '', weight: '');
+  //   return ListTile(
+  //     title: bodyinfo.height.toString().isNotEmpty
+  //         ? Column(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Text(
+  //                   '키 : ${bodyinfo.height}cm',
+  //                   style: const TextStyle(
+  //                     fontSize: 28,
+  //                   ),
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Text(
+  //                   '몸무게 : ${bodyinfo.weight}kg',
+  //                   style: const TextStyle(
+  //                     fontSize: 28,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           )
+  //         : Column(
+  //             children: const [
+  //               Text(
+  //                 '입력된 신체정보가 없습니다.',
+  //                 style: TextStyle(
+  //                   fontSize: 24,
+  //                   fontWeight: FontWeight.bold,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -374,27 +377,78 @@ class _HomeState extends State<Home> {
                 ),
               ),
               _sizedBox(),
-              Container(
-                decoration: _borderBox(),
-                height: 40,
-                width: 350,
+              // Container(
+              //   decoration: _borderBox(),
+              //   height: 40,
+              //   width: 350,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       StreamBuilder(
+              //         stream: _checkupHistoryViewModel.stream,
+              //         builder: (context, snapshot) {
+              //           return Text(
+              //             '마지막 검진일은 ${_checkupHistoryViewModel.date.toString().substring(0, 10)} 입니다.',
+              //             style: const TextStyle(fontSize: 14),
+              //           );
+              //         },
+              //       ),
+              //       TextButton(
+              //           onPressed: () {
+              //             Get.to(const AllCheckupHistory());
+              //           },
+              //           child: const Text('전체기록 보기')),
+              //     ],
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StreamBuilder(
-                      stream: _checkupHistoryViewModel.stream,
-                      builder: (context, snapshot) {
-                        return Text(
-                          '마지막 검진일은 ${_checkupHistoryViewModel.date.toString().substring(0, 10)} 입니다.',
-                          style: const TextStyle(fontSize: 14),
-                        );
-                      },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(DiabetesSurveyPage(
+                              surveyName: "당뇨병 검사",
+                            ));
+                          },
+                          child: const Text('당뇨병 검사'),
+                        ),
+                      ),
                     ),
-                    TextButton(
-                        onPressed: () {
-                          Get.to(const AllCheckupHistory());
-                        },
-                        child: const Text('전체기록 보기')),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(StrokeSurveyPage(
+                              surveyName: "뇌졸중 검사",
+                            ));
+                          },
+                          child: const Text('뇌졸중 검사'),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(DementiaSurvey());
+                          },
+                          child: const Text('치매 검사'),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -405,42 +459,42 @@ class _HomeState extends State<Home> {
                 child: _calendar(),
               ),
               _sizedBox(),
-              _head('신체정보'),
-              const SizedBox(height: 3),
-              Container(
-                decoration: _borderBox(),
-                height: 200,
-                width: 350,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 100,
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance
-                            .collection('users')
-                            .where('id', isEqualTo: id)
-                            .snapshots(),
-                        builder: ((context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          final documents = snapshot.data!.docs;
+              // _head('신체정보'),
+              // const SizedBox(height: 3),
+              // Container(
+              //   decoration: _borderBox(),
+              //   height: 200,
+              //   width: 350,
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       SizedBox(
+              //         height: 100,
+              //         child: StreamBuilder<QuerySnapshot>(
+              //           stream: FirebaseFirestore.instance
+              //               .collection('users')
+              //               .where('id', isEqualTo: id)
+              //               .snapshots(),
+              //           builder: ((context, snapshot) {
+              //             if (!snapshot.hasData) {
+              //               return const Center(
+              //                 child: CircularProgressIndicator(),
+              //               );
+              //             }
+              //             final documents = snapshot.data!.docs;
 
-                          return ListView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            children:
-                                documents.map((e) => _getBodyinfo(e)).toList(),
-                          );
-                        }),
-                      ),
-                    ),
-                    _button(const BodyInfo(), '입력하러 가기'),
-                  ],
-                ),
-              ),
+              //             return ListView(
+              //               physics: const NeverScrollableScrollPhysics(),
+              //               children:
+              //                   documents.map((e) => _getBodyinfo(e)).toList(),
+              //             );
+              //           }),
+              //         ),
+              //       ),
+              //       _button(const BodyInfo(), '입력하러 가기'),
+              //     ],
+              //   ),
+              // ),
               _sizedBox(),
               _head('이력조회'),
               const SizedBox(height: 3),
